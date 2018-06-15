@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Better-Scroll</title>
+	<meta name="viewport" content="width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    minimum-scale=1.0,
+    user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="YES">
+    <style>
+    html,body {
+    	width:  100%;
+    	height:  100%;
+    }
+	*{margin:0;padding:0;}
+	.container{
+		position: relative;
+		height: 100%;
+	}
+	.middle {
+		width: 100%;
+		height: 100%;
+	}
+	p{
+		font-size: 30px;
+		line-height:  44px;
+		text-align: center;
+	}
+	
+	ul {
+		
+	}
+	.pulldown {
+		position: absolute;
+		width: 100%;
+		left: 0;
+		top: 0;
+		
+	}
+	.pulldown > h3 {
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+	}
+</style>
+<script src="bscroll.js"></script>
+<script>
+	window.onload =function () {
+		var wrapper = document.querySelector('.middle');
+		var preLoad = document.querySelector('.preLoad');
+		var list = document.getElementById('list');
+		var topH = window.getComputedStyle(preLoad , null)['top'];
+		var bscroll = new BScroll(wrapper, {
+			probeType: 2,
+			click: true,
+			pullDownRefresh: {
+			  threshold: 90,
+			  stop: 50
+			}
+		});
+		bscroll.on('touchEnd', function (pos) {
+			console.log('touchend')
+			if(pos.y > 50) {
+				/*setTimeout(() => {
+					bscroll.finishPullDown();
+				}, 2000)*/
+			}
+		});
+		bscroll.on('scroll', function (pos) {
+			var currentH = window.getComputedStyle(preLoad , null)['top'];
+			console.log(currentH)
+			if(pos.y > 0 && pos.y < 51) {
+				var parseH = pos.y
+				/*var currentY = parseInt(topH) + parseH;
+				preLoad.style.top = currentY + 'px';*/
+					//bscroll.openPullDown({})
+			}
+		});
+		
+	}
+</script>
+</head>
+
+<body>
+	
+	<div class="container wrapper">
+		<div class="middle">
+			<ul id="list">
+				<li><p>A</p></li>
+				<li><p>B</p></li>
+				<li><p>C</p></li>
+				<li><p>D</p></li>
+				<li><p>E</p></li>
+				<li><p>F</p></li>
+				<li><p>G</p></li>
+				<li><p>H</p></li>
+				<li><p>I</p></li>
+				<li><p>F</p></li>
+				<li><p>G</p></li>
+				<li><p>H</p></li>
+				<li><p>I</p></li>
+				<li><p>J</p></li>
+				<li><p>K</p></li>
+				<li><p>L</p></li>
+				<li><p>M</p></li>
+				<li><p>N</p></li>
+				<li><p>O</p></li>
+				<li><p>P</p></li>
+				<li><p>K</p></li>
+				<li><p>R</p></li>
+				<li><p>S</p></li>
+				<li><p>T</p></li>
+				<li><p>U</p></li>
+				<li><p>V</p></li>
+				<li><p>W</p></li>
+				<li><p>X</p></li>
+				<li><p>Y</p></li>
+				<li><p>Z</p></li>
+				<li><p>F</p></li>
+			</ul>
+		</div>
+		<div class="pulldown">
+			<h3>...正在加载中</h3>
+		</div>
+	</div>
+</body>
+</html>
